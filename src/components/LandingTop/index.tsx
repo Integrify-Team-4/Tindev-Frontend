@@ -4,8 +4,8 @@ const LandingTop = () => (
 	<div className='landing-top-bg px-3'>
 		<div className='card mx-auto bg-transparent border-0'>
 			<div className='row m-auto'>
-				<div className='col-md-6 align-items-center d-flex justify-content-center'>
-					<div className='card-body'>
+				<div className='col-md-8 align-items-center d-flex justify-content-center'>
+					<div className='card-body mt-5'>
 						<h2 className=''>Heading</h2>
 						<h4 className='card-title'>Heading Text will be here</h4>
 						<p className='card-text'>
@@ -21,7 +21,7 @@ const LandingTop = () => (
 					</div>
 				</div>
 
-				<div className='col-md-6 mx-auto hide-md'>
+				<div className='col-md-4 mx-auto hide-md'>
 					<img src={welcome} alt='landing-img' className='img-fluid' />
 				</div>
 			</div>

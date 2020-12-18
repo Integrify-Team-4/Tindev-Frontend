@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import Routes from './Routes'
+import Routes from './Routes';
 
-import './scss/styles.scss'
-import Footer from './components/Footer'
+import './scss/styles.scss';
 
 const App = () => (
 	<>
 		<Routes />
-		<Footer />
 	</>
-)
+);
 
-export default App
+export default App;
