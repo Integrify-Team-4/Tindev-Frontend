@@ -1,4 +1,4 @@
-import team from '../../media/team-dev.svg';
+import team from '../../media/team-dev.svg'
 
 const LandingBottom = () => {
 	return (
@@ -16,7 +16,7 @@ const LandingBottom = () => {
 				style={{ width: '80%' }}>
 				<img className='mx-auto d-block' src={team} alt='team-svg' />
 
-				<h4 className='text-center my-2 p-3 text-primary '>About TeamDev</h4>
+				<h4 className='text-center my-2 p-3 text-primary '>About TinDev</h4>
 				<p className='text-center text-secondary p-3 w-50 m-auto'>
 					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis
 					excepturi dolorem quas unde esse est? Lorem, ipsum dolor sit amet
@@ -43,7 +43,7 @@ const LandingBottom = () => {
 				/>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default LandingBottom;
+export default LandingBottom
