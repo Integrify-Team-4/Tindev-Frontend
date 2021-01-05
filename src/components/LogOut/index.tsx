@@ -1,3 +1,5 @@
+import React from 'react'
+import { Button } from 'react-bootstrap'
 import LocalStorage from '../../local-storage'
 import { useHistory } from 'react-router-dom'
 
@@ -10,12 +12,9 @@ const LogOut = () => {
 
   return (
     <>
-      <button
-        className="btn btn-outline-dark"
-        onClick={() => deleteTokenFromLocalStorage()}
-      >
+      <Button variant="danger" onClick={() => deleteTokenFromLocalStorage()}>
         LogOut
-      </button>
+      </Button>
     </>
   )
 }

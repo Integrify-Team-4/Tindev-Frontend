@@ -24,6 +24,7 @@ body {
   color: var(--purple);
 }
 
+Button,
 .customBtn {
   background: linear-gradient(#a24fae, #773bb7);
   color: #fff;
@@ -166,6 +167,23 @@ Button.register-button {
   .responsive-calendar {
     font-size: 12px !important;
   }
+}
+
+/** navbar */
+.navbar {
+  background: white;
+}
+
+.navbar-brand {
+  padding-left: 1.6em;
+}
+
+button.navbar-toggler.collapsed {
+  background: white;
+}
+
+a.nav-link {
+  margin-left: 1.5rem;
 }
 
 /** footer */
