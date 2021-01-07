@@ -30,7 +30,7 @@ function* registerEmployerSaga() {
 function* loginEmployerSaga() {
   try {
     const credentialData = yield select(credential)
-    const res = yield axios.post('/employer/login/local', {
+    const res = yield axios.post('/login/local', {
       email: credentialData.email,
       password: credentialData.password,
     })
