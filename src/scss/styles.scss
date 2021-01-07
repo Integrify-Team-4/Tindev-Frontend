@@ -308,7 +308,7 @@ Button.register-button {
   position: relative;
 }
 
-.chat-container li .chat-text:before {
+.chat-container li .chat-text::before {
   content: '';
   position: absolute;
   width: 0;
@@ -323,7 +323,7 @@ Button.register-button {
   text-align: right;
 }
 
-.chat-container li.chat-right > .chat-text:before {
+.chat-container li.chat-right > .chat-text::before {
   right: -20px;
   border-color: transparent transparent transparent #fff;
   left: inherit;
@@ -355,21 +355,26 @@ Button.register-button {
     flex-direction: column;
     margin-bottom: 30px;
   }
+
   .chat-container li img {
     width: 32px;
     height: 32px;
   }
+
   .chat-container li.chat-left .chat-avatar {
     margin: 0 0 5px 0;
     display: flex;
     align-items: center;
   }
+
   .chat-container li.chat-left .chat-hour {
     justify-content: flex-end;
   }
+
   .chat-container li.chat-left .chat-name {
     margin-left: 5px;
   }
+
   .chat-container li.chat-right .chat-avatar {
     order: -1;
     margin: 0 0 5px 0;
@@ -378,13 +383,16 @@ Button.register-button {
     justify-content: right;
     flex-direction: row-reverse;
   }
+
   .chat-container li.chat-right .chat-hour {
     justify-content: flex-start;
     order: 2;
   }
+
   .chat-container li.chat-right .chat-name {
     margin-right: 5px;
   }
+
   .chat-container li .chat-text {
     font-size: 0.8rem;
   }
@@ -459,7 +467,6 @@ ul {
     from(#e9eff5),
     to(#fff)
   );
-
   background-image: linear-gradient(#e9eff5, #fff);
 }
 
@@ -473,7 +480,6 @@ ul {
     from(#f7f9fb),
     to(#fff)
   );
-
   background-image: linear-gradient(#f7f9fb, #fff);
 }
 
@@ -541,9 +547,11 @@ ul {
     width: 30px;
     height: 30px;
   }
+
   .users .person p.name-time {
     display: none;
   }
+
   .users .person p.name-time .time {
     display: none;
   }
