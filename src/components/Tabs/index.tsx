@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab, Row, Col, Nav } from 'react-bootstrap'
 
-const Tabs = ({ formComponent, matchComponent }: any) => {
+const Tabs = ({ formComponent, matchComponent, chatComponent }: any) => {
   return (
     <div className="py-3">
       <Tab.Container defaultActiveKey="first">
@@ -23,7 +23,7 @@ const Tabs = ({ formComponent, matchComponent }: any) => {
             <Tab.Content>
               <Tab.Pane eventKey="first">{formComponent}</Tab.Pane>
               <Tab.Pane eventKey="second">{matchComponent}</Tab.Pane>
-              <Tab.Pane eventKey="third"></Tab.Pane>
+              <Tab.Pane eventKey="third">{chatComponent}</Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
