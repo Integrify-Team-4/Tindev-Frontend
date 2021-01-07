@@ -6,12 +6,14 @@ import { Form, Col } from 'react-bootstrap'
 import HalfCircle from '../../components/HalfCircle'
 import CustomSvgIcon from '../../components/CustomSvgIcon'
 import starsLady from '../../media/star-lady.svg'
+import CustomButton from '../../components/CustomButton'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import { registerEmployerRequest } from '../../redux/actions/employer'
 import { registerJobseekerRequest } from '../../redux/actions/jobseeker'
 import { AppState } from '../../redux/types'
 import FormContainer from '../../components/FormContainer'
+import Role from '../../components/Role'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -33,6 +35,16 @@ const Register = () => {
 
   const dispatch = useDispatch()
 
+  const handleRole = (event: React.FormEvent) => {
+    event.preventDefault()
+    if (document.getElementById('jobseeker') === event.target) {
+      setRole(jobseeker)
+    }
+    if (document.getElementById('employer') === event.target) {
+      setRole(employer)
+    }
+  }
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
     if (password !== confirmPassword) {
@@ -46,13 +58,6 @@ const Register = () => {
       dispatch(registerEmployerRequest(email, password))
       setMessage('Registered successfully')
     }
-  }
-
-  const employerSelect = () => {
-    setRole(employer)
-  }
-  const jobseekerSelect = () => {
-    setRole(jobseeker)
   }
 
   return (
@@ -109,26 +114,13 @@ const Register = () => {
               />
             </Form.Group>
           </Form.Row>
-          <br />
-          <div className="d-flex justify-content-around  mb-5">
-            <button
-              className="employerBtn btn btn-outline-success mr-5 w-50"
-              onClick={employerSelect}
-            >
-              I am an Employer
-            </button>
-            <button
-              className="employerBtn btn btn-outline-success w-50"
-              onClick={jobseekerSelect}
-            >
-              I am a Jobseeker
-            </button>
-          </div>
-          <p className="text-center">
-            Already a member?
-            <Link to="/login" className="purple-text pl-2">
-              Sign In
-            </Link>
+
+          <Role handleRole={handleRole} text1="Employer" text2="Jobseeker" />
+
+          <CustomButton text="Register" className="my-3 register-button" />
+
+          <p>
+            Already a member? <Link to="/login">Sign In</Link>
           </p>
         </Form>
       </FormContainer>
