@@ -52,7 +52,8 @@ const ChatBox = () => {
                           </div>
                           <div className="chat-text">
                             Hi Kirsi. <br />
-                            How are you today?
+                            How are you today? I'm using bootystrap for the
+                            first time. :D
                           </div>
                           <p className="name-time">
                             <span className="name"></span>

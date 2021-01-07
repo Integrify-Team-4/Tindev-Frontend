@@ -331,13 +331,12 @@ Button.register-button {
 
 .chat-container li .chat-hour {
   padding: 0;
-  margin-bottom: 10px;
   font-size: 0.75rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 0 0 0 15px;
+  margin: 0 0 10px 15px;
 }
 
 .chat-container li .chat-hour > span {
@@ -459,27 +458,26 @@ ul {
 
 .users .person:hover {
   background-color: #fff;
-  /* Fallback Color */
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#e9eff5),
-    to(#fff)
-  );
+  // background-image:
+  // -webkit-gradient(
+  //   linear,
+  //   left top,
+  //   left bottom,
+  //   from(#e9eff5),
+  //   to(#fff)
+  // );
   background-image: linear-gradient(#e9eff5, #fff);
 }
 
 .users .person.active-user {
   background-color: #fff;
-  /* Fallback Color */
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#f7f9fb),
-    to(#fff)
-  );
+  // background-image: -webkit-gradient(
+  //   linear,
+  //   left top,
+  //   left bottom,
+  //   from(#f7f9fb),
+  //   to(#fff)
+  // );
   background-image: linear-gradient(#f7f9fb, #fff);
 }
 
