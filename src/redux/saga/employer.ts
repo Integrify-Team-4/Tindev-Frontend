@@ -12,6 +12,7 @@ import {
 } from '../../redux/actions/employer'
 import { registerJobPostSuccess, registerJobPostFail } from '../actions/jobpost'
 
+const role = (state: AppState) => state.employer.role
 const credential = (state: AppState) => state.employer.credential
 const jobPostFormData = (state: AppState) => state.employer.jobPost
 
@@ -30,9 +31,12 @@ function* registerEmployerSaga() {
 function* loginEmployerSaga() {
   try {
     const credentialData = yield select(credential)
+    const roleData = yield select(role)
+    console.log(role)
     const res = yield axios.post('/login/local', {
       email: credentialData.email,
       password: credentialData.password,
+      roleData: roleData.role,
     })
 
     yield put(loginEmployerSuccess(res))

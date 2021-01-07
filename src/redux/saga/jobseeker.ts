@@ -12,6 +12,7 @@ import {
   loginJobseekerFail,
 } from './../actions/jobseeker'
 
+const role = (state: AppState) => state.jobseeker.role
 const credential = (state: AppState) => state.jobseeker.credential
 
 function* registerJobseekerSaga() {
@@ -29,9 +30,11 @@ function* registerJobseekerSaga() {
 function* loginJobseekerSaga() {
   try {
     const credentialData = yield select(credential)
+    const roleData = yield select(role)
     const res = yield axios.post('/login/local', {
       email: credentialData.email,
       password: credentialData.password,
+      roleData: roleData.role,
     })
     yield put(loginJobseekerSuccess(res.data))
     yield LocalStorage.saveToken(res.data.payload.token)

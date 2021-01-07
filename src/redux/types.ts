@@ -82,6 +82,7 @@ export type LoginEmployerSuccessAction = {
     employerInfo: {
       email: string
       password: string
+      role: string
     }
   }
 }
@@ -152,6 +153,7 @@ export type LoginJobseekerSuccessAction = {
     jobSeekerInfo: {
       email: string
       password: string
+      role: string
     }
   }
 }
@@ -250,6 +252,7 @@ export type Credential = {
   skills?: any[]
   skillLevel?: string
   duration?: string
+  role?: string
 }
 
 export type CredentialState = {
@@ -261,6 +264,7 @@ export type CredentialStateEmployer = {
     email: string
     password: string
   }
+  role: string
   loading: Boolean
   error: any
   jobPost: {
@@ -276,6 +280,7 @@ export type CredentialStateJobseeker = {
     email: string
     password: string
   }
+  role: string
   loading: Boolean
   error: any
   skills: any[]

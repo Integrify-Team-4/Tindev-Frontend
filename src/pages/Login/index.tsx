@@ -9,7 +9,7 @@ import starsLady from '../../media/standing-lady.svg'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
-import Role from '../../components/Role'
+//import Role from '../../components/Role'
 import CustomButton from '../../components/CustomButton'
 import Footer from '../../components/Footer'
 import { loginEmployerRequest } from '../../redux/actions/employer'
@@ -19,7 +19,7 @@ import { AppState } from '../../redux/types'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState({})
+  //const [role, setRole] = useState({})
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -35,24 +35,24 @@ const Login = () => {
     (state: AppState) => state.employer.loading
   )
 
-  const handleRole = (event: React.FormEvent) => {
-    event.preventDefault()
-    if (document.getElementById('jobseeker') === event.target) {
-      setRole(jobseeker)
-    }
-    if (document.getElementById('employer') === event.target) {
-      setRole(employer)
-    }
-  }
+  // const handleRole = (event: React.FormEvent) => {
+  //   event.preventDefault()
+  //   if (document.getElementById('jobseeker') === event.target) {
+  //     setRole(jobseeker)
+  //   }
+  //   if (document.getElementById('employer') === event.target) {
+  //     setRole(employer)
+  //   }
+  // }
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault()
-    if (role === employer) {
-      dispatch(loginEmployerRequest(email, password))
-      history.push('/company/profile')
-    } else if (role === jobseeker) {
+    if (jobseeker.role) {
       dispatch(loginJobseekerRequest(email, password))
       history.push('/jobseeker/profile')
+    } else if (employer.role) {
+      dispatch(loginEmployerRequest(email, password))
+      history.push('/company/profile')
     }
   }
 
@@ -84,7 +84,7 @@ const Login = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Role handleRole={handleRole} text1="Employer" text2="Jobseeker" />
+          {/* <Role handleRole={handleRole} text1="Employer" text2="Jobseeker" /> */}
           <CustomButton text="Login" className="login-button" />
         </Form>
         <Row className="forgot-password py-3">
