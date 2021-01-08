@@ -6,6 +6,13 @@ import rootSaga from './saga'
 import { AppState } from './types'
 
 export const initState: AppState = {
+  user: {
+    credential: { email: '', password: '' },
+    userInfo: { role: '' },
+    loading: false,
+    error: null,
+    skills: [],
+  },
   employer: {
     credential: { email: '', password: '' },
     role: '',

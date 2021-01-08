@@ -1,21 +1,21 @@
 import { put, takeLatest, select } from 'redux-saga/effects'
 import axios from 'axios'
 
-import { AppState } from '../types'
-import LocalStorage from '../../local-storage'
+import { AppState, DeletingRequestActionType } from '../types'
 
 import {
   registerEmployerSuccess,
   registerEmployerFail,
-  loginEmployerSuccess,
-  loginEmployerFail,
 } from '../../redux/actions/employer'
-import { registerJobPostSuccess, registerJobPostFail } from '../actions/jobpost'
+import {
+  registerJobPostSuccess,
+  registerJobPostFail,
+  deleteJobPostFail,
+  deleteJobPostSuccess,
+} from '../actions/jobpost'
 
-const role = (state: AppState) => state.employer.role
 const credential = (state: AppState) => state.employer.credential
 const jobPostFormData = (state: AppState) => state.employer.jobPost
-
 function* registerEmployerSaga() {
   try {
     const credentialData = yield select(credential)
@@ -28,24 +28,6 @@ function* registerEmployerSaga() {
   }
 }
 
-function* loginEmployerSaga() {
-  try {
-    const credentialData = yield select(credential)
-    const roleData = yield select(role)
-    console.log(role)
-    const res = yield axios.post('/login/local', {
-      email: credentialData.email,
-      password: credentialData.password,
-      roleData: roleData.role,
-    })
-
-    yield put(loginEmployerSuccess(res))
-    yield LocalStorage.saveToken(res.data.payload.token)
-  } catch (error) {
-    yield put(loginEmployerFail())
-  }
-}
-
 function* creatingJobPostSaga() {
   try {
     const job = yield select(jobPostFormData)
@@ -53,13 +35,22 @@ function* creatingJobPostSaga() {
     console.log(res)
     yield put(registerJobPostSuccess())
   } catch (e) {
-    yield registerJobPostFail(e)
+    yield put(registerJobPostFail(e))
+  }
+}
+function* deletingJobPostSaga(action: DeletingRequestActionType) {
+  try {
+    const jobPostId = yield action.payload
+    yield axios.delete(`/employer/jobs/${jobPostId}`)
+    yield put(deleteJobPostSuccess())
+  } catch (e) {
+    yield put(deleteJobPostFail(e))
   }
 }
 const sagaWatcher = [
   takeLatest('REGISTER_EMPLOYER_REQUEST', registerEmployerSaga),
-  takeLatest('LOGIN_EMPLOYER_REQUEST', loginEmployerSaga),
   takeLatest('JOB_POST_REQUEST', creatingJobPostSaga),
+  takeLatest('JOB_DELETE_REQUEST', deletingJobPostSaga),
 ]
 
 export default sagaWatcher
