@@ -7,9 +7,8 @@ import {
 } from '../types'
 
 const initialState = {
-  credential: { email: '', password: '' },
+  credential: { email: '', password: '', role: '' },
   userInfo: {
-    role: '',
     firstName: '',
     lastName: '',
     skills: [],
