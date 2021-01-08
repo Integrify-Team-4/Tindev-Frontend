@@ -48,6 +48,8 @@ export type LoginUserSuccessAction = {
     credential: {
       email: string
       password: string
+    }
+    userInfo: {
       role: string
       firstName?: string
       lastName?: string
@@ -261,6 +263,8 @@ export type CredentialStateUser = {
   credential: {
     email: string
     password: string
+  }
+  userInfo: {
     role: string
   }
   loading: Boolean

@@ -23,7 +23,7 @@ const Login = () => {
 
   const user = useSelector((state: AppState) => state.user)
   const { error, loading } = user
-  const role = useSelector((state: AppState) => state.user.credential.role)
+  const role = useSelector((state: AppState) => state.user.userInfo.role)
 
   const submitHandler = (e: React.FormEvent) => {
     console.log('role1', role)

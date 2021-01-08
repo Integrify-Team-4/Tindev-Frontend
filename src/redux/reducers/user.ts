@@ -7,8 +7,9 @@ import {
 } from '../types'
 
 const initialState = {
-  credential: { email: '', password: '', role: '' },
+  credential: { email: '', password: '' },
   userInfo: {
+    role: '',
     firstName: '',
     lastName: '',
     skills: [],
@@ -36,7 +37,12 @@ const initialState = {
 const user = (state = initialState, action: UserActions) => {
   switch (action.type) {
     case LOGIN_USER_REQUEST:
-      return { ...state, loading: true, credential: action.payload }
+      return {
+        ...state,
+        loading: true,
+        credential: action.payload,
+        userInfo: action.payload,
+      }
     case LOGIN_USER_SUCCESS:
       console.log('payload in redux', action.payload)
       return { ...state, loading: false, userInfo: action.payload }

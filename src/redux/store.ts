@@ -7,7 +7,10 @@ import { AppState } from './types'
 
 export const initState: AppState = {
   user: {
-    credential: { email: '', password: '', role: '' },
+    credential: { email: '', password: '' },
+    userInfo: {
+      role: '',
+    },
     loading: false,
     error: null,
     skills: [],
