@@ -40,7 +40,7 @@ const MatchCardCompany = ({ match }: MatchCardProps) => {
                 </div>
                 <Col>
                   {/*TODO: path needs to be dynamic */}
-                  <Link className="float-right" to="/jobseeker/view">
+                  <Link className="float-right" to="/match/view/applicant/:id">
                     View Profile
                   </Link>
                 </Col>
