@@ -45,7 +45,7 @@ export type LoginUserRequestAction = {
 export type LoginUserSuccessAction = {
   type: typeof LOGIN_USER_SUCCESS
   payload: {
-    userInfo: {
+    credential: {
       email: string
       password: string
       role: string
@@ -261,8 +261,6 @@ export type CredentialStateUser = {
   credential: {
     email: string
     password: string
-  }
-  userInfo: {
     role: string
   }
   loading: Boolean
