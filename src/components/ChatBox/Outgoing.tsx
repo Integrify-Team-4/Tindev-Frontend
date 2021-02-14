@@ -1,23 +1,30 @@
-import React from 'react'
-import { Image } from 'react-bootstrap'
-const Outgoing = () => {
+import React, { useState } from 'react'
+import { Button } from 'react-bootstrap'
+import moment from 'moment'
+
+import UserImage from '../UserImage'
+
+const Outgoing = ({ messages, removeMessage, currentUser, name, image }: any) => {
+  const [userName, setName] = useState(name)
+  const [userImage, setImage] = useState(image)
+  const [createdAt, setCreatedAt] = useState('')
   return (
     <>
-      <li className="chat-right">
-        <div className="chat-hour">
-          08:56 <span className="fa fa-check-circle"></span>
-        </div>
-        <div className="chat-text">
-          Hi, Dlip <br />I need more information about Developer Plan.
-        </div>
-        <div className="chat-avatar">
-          <Image
-            src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-            alt="avatar"
-          />
-          <div className="chat-name">Sam</div>
-        </div>
-      </li>
+      {messages && currentUser && messages.map((m: any) => {
+        return (
+          <div className="chat-left" key={m.id}>
+            <div className="chat-avatar">
+              <UserImage image={image} />
+              <div className="chat-name">{name}</div>
+            </div>
+            <div className="chat-text">{m.content}</div>
+            <div className="chat-hour">
+              <span className="fa fa-check-circle">{moment(m.createdAt).format('HH:mm')}</span>
+            </div>
+            <Button onClick={() => removeMessage(m.id)}>x</Button>
+          </div>
+        )
+      })}
     </>
   )
 }

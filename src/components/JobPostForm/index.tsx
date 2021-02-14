@@ -36,6 +36,11 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
     startingDate: startingAt,
   })
 
+  const formatInputValue = () => {
+    if (!startingAt) return ''
+    return `${startingAt.day}.${startingAt.month}.${startingAt.year}`
+  }
+
   const skills = useSelector((state: AppState) => state.resources.skills)
   const suggestions = skills.map(skill => {
     return {
@@ -44,7 +49,6 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
     }
   })
 
-  // TODO: date format
   const user = useSelector((state: AppState) => state.user.userInfo)
   const { loading, error } = user
 
@@ -75,7 +79,7 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
         jobDescription: formData.jobDescription,
         skills: postSkills,
         seniority: formData.seniority,
-        startingDate: startingAt,
+        startingDate: formatInputValue(),
       })
     )
     setFormData({
@@ -104,7 +108,7 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
       {loading && <Loader />}
       <h2>{header}</h2>
       <Row>
-        <Col xs>
+        <Col>
           <Form onSubmit={submitHandler}>
             <Form.Group
               className="form-group-set"
@@ -176,7 +180,7 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
                   className="text-field"
                   type="text"
                   name="seniority"
-                  placeholder="Seniority"
+                  placeholder="Junior/Middle/Senior"
                   value={formData.seniority}
                   onChange={handleChange}
                 />
@@ -197,6 +201,7 @@ const JobPostForm = ({ header }: JobPostFormProps) => {
                   inputPlaceholder="Select starting day"
                   colorPrimary="#000"
                   inputClassName="my-custom-input"
+                  formatInputText={formatInputValue}
                 />
               </Col>
             </Form.Group>

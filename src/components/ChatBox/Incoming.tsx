@@ -1,24 +1,28 @@
 import React from 'react'
-import { Image } from 'react-bootstrap'
-const Incoming = () => {
+import { Button } from 'react-bootstrap'
+import moment from 'moment'
+
+import UserImage from '../UserImage'
+
+const Incoming = ({ messages, removeMessage, image, name, currentUser }: any) => {
+  
   return (
     <>
-      <li className="chat-left">
-        <div className="chat-avatar">
-          <Image
-            src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-            alt="avatar"
-          />
-          <div className="chat-name">Kirsi</div>
+      {!currentUser && messages && messages.map((m: any) => {
+        return (
+        <div className="chat-right" key={m.id}>
+          <div className="chat-hour">
+            <span className="fa fa-check-circle">{moment(m.createdAt).format('HH:mm')}</span>
+          </div>
+          <div className="chat-text">{m.content}</div>
+          <div className="chat-avatar">
+            <UserImage image={image} />
+            <div className="chat-name">{name}</div>
+          </div>
+          <Button onClick={() => removeMessage(m.id)}>x</Button>
         </div>
-        <div className="chat-text">
-          Hello, I'm Kirsi. <br />
-          How can I help you today?
-        </div>
-        <div className="chat-hour">
-          08:55 <span className="fa fa-check-circle"></span>
-        </div>
-      </li>
+      )
+    })}
     </>
   )
 }

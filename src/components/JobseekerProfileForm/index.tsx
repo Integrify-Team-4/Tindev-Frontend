@@ -20,11 +20,21 @@ const KeyCodes = {
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter]
 
+const styles = {
+  degree: {
+    paddingRight: '1rem',
+  },
+  university: {
+    paddingLeft: '1rem',
+  },
+}
+
 const JobseekerProfileForm = () => {
   const user = useSelector((state: AppState) => state.user.userInfo)
   const [tags, setTags] = useState<any[]>([])
-  const [startingAt, setStartingAt] = useState<DayValue>(null)
+  const [startingAt, setStartingAt] = useState<DayValue>()
   const [isOpenRelocate, setOpenRelocate] = useState(user.relocate)
+  const [workingExperience, setWorkingExperience] = useState(0)
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -33,10 +43,16 @@ const JobseekerProfileForm = () => {
     degree: '',
     institute: '',
     skills: [],
-    workExperience: 0,
+    workExperience: workingExperience,
     relocate: isOpenRelocate,
     startingDate: startingAt,
   })
+
+  // Date picker
+  const formatInputValue = () => {
+    if (!startingAt) return ''
+    return `${startingAt.day}.${startingAt.month}.${startingAt.year}`
+  }
 
   // Skill tags
   const skills = useSelector((state: AppState) => state.resources.skills)
@@ -48,10 +64,11 @@ const JobseekerProfileForm = () => {
   })
 
   const handleInputChange = () => {
-    setTags(tags)
+    return setTags(tags)
   }
 
-  // Handler for form inputs. TODO: workExperience, relocate
+  // TODO: workExperience, relocate, contact
+  // Handler for form inputs.
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
 
@@ -59,6 +76,12 @@ const JobseekerProfileForm = () => {
       ...state,
       [name]: value,
     })
+  }
+
+  // Work experience
+  const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setWorkingExperience(Number(value))
   }
 
   const dispatch = useDispatch()
@@ -73,7 +96,6 @@ const JobseekerProfileForm = () => {
     })
     dispatch(
       updateJobseekerRequest({
-        //@ts-ignore
         firstName: state.firstName,
         lastName: state.lastName,
         contact: state.contact,
@@ -82,15 +104,15 @@ const JobseekerProfileForm = () => {
         institute: state.institute,
         skills: skills,
         workExperience: state.workExperience,
-        startingDate: startingAt,
+        startingDate: formatInputValue(),
         relocate: isOpenRelocate,
       })
     )
-    console.log('workExperience', state.workExperience)
-    console.log('contact', state.contact)
+    console.log('workingExperience', workingExperience)
     console.log('isOpenRelocate', isOpenRelocate)
   }
 
+  // Tag functions
   const handleDelete = (i: any) => {
     const filteredTags = tags.filter((tag, index) => index !== i)
     setTags(filteredTags)
@@ -107,9 +129,10 @@ const JobseekerProfileForm = () => {
       </div>
       <UploadImage />
       <Form onSubmit={e => handleSubmit(e)} className="container my-5">
-        <Form.Group as={Row} controlId="formHorizontalFName">
+        <Form.Group as={Row}>
           <Col sm={6}>
             <Form.Control
+              //required
               type="text"
               name="firstName"
               placeholder="First name"
@@ -120,6 +143,7 @@ const JobseekerProfileForm = () => {
 
           <Col sm={6}>
             <Form.Control
+              //required
               type="text"
               name="lastName"
               placeholder="Last name"
@@ -129,12 +153,14 @@ const JobseekerProfileForm = () => {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} controlId="formHorizontalphone">
+        {/* TODO */}
+        <Form.Group as={Row}>
           <Col sm={6}>
             <Form.Control
+              //required
               type="tel"
               name="contact"
-              placeholder="Phone Number"
+              placeholder="Phone Nr."
               value={state.contact}
               onChange={handleChange}
             />
@@ -142,12 +168,14 @@ const JobseekerProfileForm = () => {
 
           <Col sm={6}>
             <Form.Control
+              //required
               type="text"
               name="seniority"
-              placeholder="Junior/Middle/Senior"
+              placeholder="Seniority"
               value={state.seniority}
               onChange={handleChange}
             />
+            <small>Junior/Middle/Senior</small>
           </Col>
         </Form.Group>
 
@@ -155,23 +183,27 @@ const JobseekerProfileForm = () => {
           Education
         </Form.Label>
         <Form.Row>
-          <Col sm={6} className="pr-3">
+          <Col sm={6} style={styles.degree} className="degree">
             <Form.Control
+              //required
               type="text"
-              placeholder="Name of Degree"
+              placeholder="Degree"
               name="degree"
               value={state.degree}
               onChange={handleChange}
             />
+            <small>Name of Degree</small>
           </Col>
-          <Col sm={6} className="pl-3">
+          <Col sm={6} style={styles.university} className="university">
             <Form.Control
+              //required
               type="text"
-              placeholder="University / School"
+              placeholder="Institute"
               name="institute"
               value={state.institute}
               onChange={handleChange}
             />
+            <small>University / School</small>
           </Col>
         </Form.Row>
 
@@ -193,21 +225,28 @@ const JobseekerProfileForm = () => {
           </Col>
         </Form.Row>
 
+        {/* TODO */}
         <Form.Row>
           <Form.Label as="legend" column className="my-1">
-            Work Experience
+            Work Experience in Years
           </Form.Label>
           <Col className="my-1 pl-2" lg={9}>
             <Form.Control
-              type="number"
-              name="workExperience"
-              placeholder="Work Experience in Years"
-              value={state.workExperience}
-              onChange={handleChange}
+              //required
+              type="range"
+              min="0"
+              max="30"
+              className="slider"
+              id="range"
+              name="workingExperience"
+              value={workingExperience}
+              onChange={handleRange}
             />
+            <p>{workingExperience}</p>
           </Col>
         </Form.Row>
 
+        {/* TODO */}
         <Form.Row>
           <Form.Label as="legend" column sm="3" className="mt-3 mb-1">
             Open to Relocate?
@@ -238,6 +277,7 @@ const JobseekerProfileForm = () => {
               inputPlaceholder="Select earliest starting day"
               colorPrimary="#000"
               inputClassName="my-custom-input"
+              formatInputText={formatInputValue}
             />
           </Col>
         </Form.Group>
